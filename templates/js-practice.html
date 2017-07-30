@@ -370,6 +370,54 @@
     var PRIME_COLORS = ['orange', 'midnightblue', 'darkgoldenrod', 'green', 'purple'];
 
   // put the rest of your code here
+
+  
+
+  function getPrimeNum(num) {
+    var primeNums = [];
+    primeNums.push(2);
+    var isDiv = false;
+
+    for (var i = 2; primeNums.length  <= num-1 ; i++) {
+
+      if (i % 2 !== 0) {
+        for (var j = 0; j <= primeNums.length; j++) {
+          var pNum = primeNums[j];
+
+          if (i % pNum === 0) {
+            isDiv = true;
+            break;
+          }
+        }
+        if (isDiv !== true) {
+          primeNums.push(i);
+          
+        }
+        isDiv = false;
+        
+        }
+        
+      }
+      return primeNums;
+    }
+
+  
+
+  function showPrimeNums() {
+    var primeNumbers = getPrimeNum(5);
+    for (var i = 0; i < 5; i++) {
+      $("#prime-circle-area").append("<div class='prime-circle' style='background-color: " + PRIME_COLORS[i] + "'>" + primeNumbers[i] + "</div>");
+      console.log("blah");
+    }
+    
+
+    //$("#hello").attr("class", "prime-circle");
+
+    //$("#prime-circle-area").html("blah");
+
+  }
+
+  $("#make-prime-circles").on("click", showPrimeNums);
 </script>
 
 
