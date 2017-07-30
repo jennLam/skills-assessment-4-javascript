@@ -37,9 +37,12 @@
 
 <script>
   "use strict";
-  // code here for above problem
+  
+  //get DOM element by id, popup-alert-button and set to variable, popupButton
   var popupButton = document.getElementById("popup-alert-button");
 
+  //add event listener to popupButton so when it is clicked, the inline function
+  //will run and open an alert box
   popupButton.addEventListener('click', function () {
     alert("Here is an alert box!");
   });
@@ -84,26 +87,37 @@
 <script>
   "use strict";
 
-  // code here for the above problem
+  //get DOM element by id, multiplying form and set to mtply
   var mtply = document.getElementById("multiplying-form");
 
-  mtply.addEventListener("submit", multiplyNumbers);
 
+  
   function multiplyNumbers(evt) {
+    //prevents form from being submitted
     evt.preventDefault();
 
-    var firstNum = parseInt(document.getElementById("mults-of").value);
+    //it takes the value from the form that the user selects and stores them into two variables, multNum and maxNum
+    var multNum = parseInt(document.getElementById("mults-of").value);
 
-    var secondNum = parseInt(document.getElementById("max").value);
+    var maxNum = parseInt(document.getElementById("max").value);
 
+    //create an empty array
     var mtplyArray = [];
 
-    for (var i = firstNum; i < secondNum; i += firstNum) {
+    //set i to the multNum and while multNum is less than maxNum, increment i by multNum (to get all the multiples of multNum up to maxNum)
+    for (var i = multNum; i <= maxNum; i += multNum) {
+      //add value to array
       mtplyArray.push(i);
     }
 
+    //print array to console
     console.log(mtplyArray);
   }
+
+  //add event listener so when submit is clicked, multiplyNumbers will run
+  mtply.addEventListener("submit", multiplyNumbers);
+
+
 
 </script>
 
@@ -126,24 +140,26 @@
 <script>
   "use strict";
 
-//  Here's a stub of a function you can use!
+  //get DOM element and set to reverseButton
+  var reverseButton = document.getElementById("reverse-string-button");
 
- function reverseString(evt) {
-   var msg = "Porcupines are cute";
+  function reverseString(evt) {
+    var msg = "Porcupines are cute";
 
-   // do some stuff here to reverse that string into a new variable
+    // do some stuff here to reverse that string into a new variable
  
-   var newMsg = "";
+    var newMsg = "";
 
-   for (var i = msg.length - 1; i >= 0; i--) {
-    newMsg += msg[i];
-   };
+    //reverse string by looping through it
+    //starting from the end and appending each //letter to newMsg and setting it newMsg
+    for (var i = msg.length - 1; i >= 0; i--) {newMsg += msg[i];
+    };
 
-   alert(newMsg);
+    //show popup box with the reversed string
+    alert(newMsg);
  }
 
- var reverseButton = document.getElementById("reverse-string-button");
-
+ //event listener so when button is clicked reverseString will run
  reverseButton.addEventListener("click", reverseString);
 
 </script>
@@ -171,6 +187,7 @@
 <script>
   "use strict";
 
+  //event listener so when button is clicked, a popup box will show
   $(".find-me").on("click", function () {
     alert("It pops up!");
   });
@@ -208,10 +225,12 @@
   "use strict";
 
   function showPorcupine() {
+    //image will slide down slowly and appear
     $("#cute-porcupine-image").slideDown(1000);
     $("#cute-porcupine-image").show();
   }
 
+  //event listener so that when button is clicked, inline function will run which waits 1 sec before running showPorcupine
   $("#make-a-porcupine").on("click", function () {
     setTimeout(showPorcupine, 1000)
   });
@@ -248,12 +267,17 @@
   "use strict";
 
   function showAgreeableMsg(evt) {
+    //prevent form from submitting/redirecting
     evt.preventDefault();
 
+    //get favorite food entered in text input
     var favFood = $("#favorite-food-input").val();
-    $("#agreeable-text").html("I like " + favFood + ", too.");
 
+    //set text in div to say I like favFood, too
+    $("#agreeable-text").html("I like " + favFood + ", too.");
   }
+
+  //event listener so when submit is pressed, showAgreeableMsg will run
   $("#agreeable-form").on("submit", showAgreeableMsg);
 
 </script>
@@ -291,45 +315,50 @@
   var guessedNum;
 
   function onOffButton(playGame, numGuess, tryNum) {
-
+    //toggle buttons and field
     $("#play-guessing-game").attr("disabled", playGame);
     $("#number-guessed").attr("disabled", numGuess);
     $("#try-this-number").attr("disabled", tryNum);
 
   }
 
+  //shows message in div
   function showGameMsg(msg) {
     $("#number-guessing-msg").html(msg);
   }
 
   function getRandomNum(evt) {
-
-    $("#play-guess-game").attr("enabled", false);
+    //get random number
     randomNum = Math.floor(Math.random() * 100);
     showGameMsg("Guess a number between 1 and 100.");
 
+    //changes play button to disabled and guess button and text field to enabled
     onOffButton(true, false, false);
-
-    
   }
 
   function getUserNum(evt) {
+    //prevent form from submitting
     evt.preventDefault();
     
+    //get value of user's guess number
     guessedNum = $("#number-guessed").val();
 
+    //compare the user's number with random number
     if (guessedNum == randomNum) {
+      //if it is right, tell them congrats and reset buttons
+      //enable play and disable guess
       showGameMsg("Congrats! You're right!")
-
       onOffButton(false, true, true);
-
     } else if (guessedNum > randomNum) {
+      //if user's number is too high, show too high
       showGameMsg("Too high.")
     } else if (guessedNum < randomNum) {
+      //if user's number is too low, show too low
       showGameMsg("Too low.")
     }
   }
 
+  //event listeners for buttons when clicked or submitted
   $("#play-guessing-game").on("click", getRandomNum);
   $("#guessing-game-form").on("submit", getUserNum);
 </script>
@@ -370,44 +399,52 @@
     var PRIME_COLORS = ['orange', 'midnightblue', 'darkgoldenrod', 'green', 'purple'];
 
   function getPrimeNum(num) {
+    //create empty list and instantly add 2
     var primeNums = [];
     primeNums.push(2);
+    //boolean variable to check if divisible
     var isDiv = false;
 
+    //while the primeNums length is not the specified num
+    //loop through, starting with 2
     for (var i = 2; primeNums.length  <= num-1 ; i++) {
-
+      //check to make sure number is odd
       if (i % 2 !== 0) {
+        //if it is, loop through the current primeNums array
+        //and make sure the number is not divisible by other numbers in nthe array
         for (var j = 0; j <= primeNums.length; j++) {
           var pNum = primeNums[j];
-
+          //if it is divisible, set isDiv to true and break loop
           if (i % pNum === 0) {
             isDiv = true;
             break;
           }
         }
+        //check if isDiv true or false
+        //if it is not add it to the primeNums array
         if (isDiv !== true) {
           primeNums.push(i);
           
         }
+        //reset isDiv to false
         isDiv = false;
-        
         }
-        
       }
+      //return array
       return primeNums;
     }
 
-  
-
   function showPrimeNums() {
+    //gets first 5 prime numbers in an array
     var primeNumbers = getPrimeNum(5);
+    //loops through five times and create divs with colors from prime_colors array and numbers from primeNumbers array
     for (var i = 0; i < 5; i++) {
       $("#prime-circle-area").append("<div class='prime-circle' style='background-color: " + PRIME_COLORS[i] + "'>" + primeNumbers[i] + "</div>");
-      //console.log("blah");
     }
 
   }
 
+  //event listener when button is clicked, function runs
   $("#make-prime-circles").on("click", showPrimeNums);
 </script>
 
