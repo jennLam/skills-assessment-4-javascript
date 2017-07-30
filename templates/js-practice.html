@@ -369,10 +369,6 @@
 
     var PRIME_COLORS = ['orange', 'midnightblue', 'darkgoldenrod', 'green', 'purple'];
 
-  // put the rest of your code here
-
-  
-
   function getPrimeNum(num) {
     var primeNums = [];
     primeNums.push(2);
@@ -407,13 +403,8 @@
     var primeNumbers = getPrimeNum(5);
     for (var i = 0; i < 5; i++) {
       $("#prime-circle-area").append("<div class='prime-circle' style='background-color: " + PRIME_COLORS[i] + "'>" + primeNumbers[i] + "</div>");
-      console.log("blah");
+      //console.log("blah");
     }
-    
-
-    //$("#hello").attr("class", "prime-circle");
-
-    //$("#prime-circle-area").html("blah");
 
   }
 
@@ -464,7 +455,19 @@
     $("#puppies-go-here").append(puppyPhoto);
   }
 
-  // put your code here
+  // get function will go to puppies.json route in server and send the data, numOfPups and once the data gets back from the server, the success function, showPuppies will run
+  function getPuppies(evt) {
+    evt.preventDefault();
+
+    var numOfPups = {
+      "num-puppies": $("#num-puppies").val()
+    };
+
+    $.get("/puppies.json", numOfPups, showPuppies);
+  }
+
+  // when user clicks submit, getPuppies will be called
+  $("#puppy-form").on("submit", getPuppies);
 
 </script>
 
