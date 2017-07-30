@@ -528,7 +528,19 @@
     $("#t-rex-img").append(tRexPhoto);
   }
 
-  // put your code here
+  // Post function will send attackInfo data to the t-rex-attack.json route and when it gets data from the server, the success function, showTRexResults will run
+  function getTRex(evt) {
+    evt.preventDefault();
+
+    var attackInfo = {
+      "attack-target": $("#t-rex-target").val()
+    }
+
+    $.post("/t-rex-attack.json", attackInfo, showTRexResults);
+  }
+
+  // When user clicks the Launch Attack button, getTRex function will be called
+  $("#t-rex-form").on("submit", getTRex);
 
 </script>
 
